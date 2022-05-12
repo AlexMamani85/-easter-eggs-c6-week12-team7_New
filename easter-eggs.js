@@ -12,12 +12,12 @@ function Loader(frames = ["|"  , "/", "-","\\"]) {
       index += 1; 
     }    
   this.render = function() {
-  const intervalId = setInterval(animate, 1000);
+  const intervalId = setInterval(animate, 600);
   // setTimeout(clearInterval, 3000, intervalId)
   setTimeout(() => {
     clearInterval(intervalId);
       console.clear();
-      }, 5500);
+      }, 3000);
     }
 }
 
