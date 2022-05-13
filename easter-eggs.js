@@ -24,17 +24,18 @@ function Loader(frames = ["|"  , "/", "-","\\"]) {
 
 function Clock() {
   
-  function hora() { 
+  function time() { 
     console.clear();
     let date = new Date()
     console.log(date.toLocaleTimeString())
   }
 
-      const intervalId1 = setInterval(hora, 1000);
-      setTimeout(() => {
-      clearInterval(intervalId1);
-      console.clear();
-      }, 8000);
+  const intervalId1 = setInterval(time, 1000);
+  window.addEventListener("click", (e)=> {
+    clearInterval(intervalId1);
+    console.clear();
+    console.log("Let's keep playing!");
+  })
 }
 
 function numberFormatter() {
@@ -58,7 +59,7 @@ function EasterEgg(func, ...args) {
 }
 
 // EasterEgg("clock")
-EasterEgg("marquee","No mas pollos en un pais de cuyes",100)
+// EasterEgg("marquee","No mas pollos en un pais de cuyes",100)
 
 function Banner(content, long) {
   this.content = content;
