@@ -12,7 +12,7 @@ function Loader(frames = ["|"  , "/", "-","\\"]) {
       index += 1; 
     }  
   this.render = function() {
-  const intervalId = setInterval(animate, 600);
+  const intervalId = setInterval(animate, 300);
   // setTimeout(clearInterval, 3000, intervalId)
   setTimeout(() => {
     clearInterval(intervalId);
@@ -41,53 +41,56 @@ function numberFormatter() {
 }
 
 function EasterEgg(func, ...args) {
-  // function EasterEgg(func, content, long) {
-  switch(func){
-    case "clock":
-      Clock();
-      break;
-    case "marquee":
-      Marquee(args[0], args[1]);
-      break;     
-  }
+  const loader = new Loader()
+  loader.render()
+  setTimeout(()=>{
+    switch(func){
+      case "clock":
+        Clock();
+        break;
+      case "marquee":
+        Marquee(args[0], args[1]);
+        break;     
+    }
+  }, 3000)
+  
       
 }
-    
-    EasterEgg("clock")
-    // EasterEgg("marquee","No mas pollos en un pais de cuyes",100)
-    
-    function Banner(content, long) {
-      this.content = content;
-      this.banner = " ".repeat(long);
-      let arr = []
-      let j = long
-      for (let i = 1; i < long; i++) {
-        espacio="*";
-        espacio=" ";
-        let result = espacio.repeat(j);
-        let result2 = espacio.repeat(i);
-        console.clear();
-        arr.push(result.concat(content,result2).slice(content.length+2,long));
-        j--;
-      }
-      return arr
-    }
-    
-    function Marquee(content, long){
-      let arr2 = Banner(content, long)
-      this.frames = arr2;
-      this.execute;
-      let index = 0;
-      const animate = () => {
-        console.clear();
-        console.log(this.frames[index]);
-        index += 1; 
-      }
-          
-      const intervalId = setInterval(animate, 200);
-        setTimeout(() => {
-        clearInterval(intervalId);
-        console.clear();
-      }, long * 200 - 200);
+
+// EasterEgg("clock")
+EasterEgg("marquee","No mas pollos en un pais de cuyes",100)
+
+function Banner(content, long) {
+  this.content = content;
+  this.banner = " ".repeat(long);
+  let arr = []
+  let j = long
+  for (let i = 1; i < long; i++) {
+    espacio="*";
+    espacio=" ";
+    let result = espacio.repeat(j);
+    let result2 = espacio.repeat(i);
+    console.clear();
+    arr.push(result.concat(content,result2).slice(content.length+2,long));
+    j--;
+  }
+  return arr
+}
+
+function Marquee(content, long){
+  let arr2 = Banner(content, long)
+  this.frames = arr2;
+  this.execute;
+  let index = 0;
+  const animate = () => {
+    console.clear();
+    console.log(this.frames[index]);
+    index += 1; 
+  }
       
+  const intervalId = setInterval(animate, 200);
+    setTimeout(() => {
+    clearInterval(intervalId);
+    console.clear();
+  }, long * 200 - 200);
 }
