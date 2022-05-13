@@ -20,6 +20,7 @@ function Loader(frames = ["|"  , "/", "-","\\"]) {
       }, 3000);
     }
 }
+const loader = new Loader()
 
 function Clock() {
 }
@@ -27,8 +28,41 @@ function Clock() {
 function numberFormatter() {
 }
 
-function EasterEgg() {
+function EasterEgg(content, long) {
+  let arr2 = Marquee(content, long)
+  this.frames = arr2;
+  this.execute;
+  let index = 0;
+  const animate = () => {
+    console.clear();
+    console.log(this.frames[index]);
+    index += 1; 
+  }    
+      
+  const intervalId = setInterval(animate, 200);
+    setTimeout(() => {
+    clearInterval(intervalId);
+    console.clear();
+  }, long * 200 - 200);
 
 }
 
-const loader = new Loader()
+  // EasterEgg("No mas pollos en un pais de cuyes",100)
+  // EasterEgg("No mas pollos en un pais de cuyes",100)
+  
+function Marquee(content, long) {
+  this.content = content;
+  this.banner = " ".repeat(long);
+  let arr = []
+  let j = long
+  for (let i = 1; i < long; i++) {
+    espacio="*";
+    espacio=" ";
+    let result = espacio.repeat(j);
+    let result2 = espacio.repeat(i);
+    console.clear();
+    arr.push(result.concat(content,result2).slice(content.length+2,long));
+    j--;
+  }
+  return arr
+}
