@@ -3,23 +3,23 @@ function TicTacToe() {
 
 function Loader(frames = ["|"  , "/", "-","\\"]) {
   this.frames = frames;
-    this.execute;
-    let index = 0;
-    const animate = () => {
-      if( index >= this.frames.length ) index = 0;
-      console.clear();
-      console.log(this.frames[index]);
-      index += 1; 
-    }  
+  this.execute;
+  let index = 0;
+  const animate = () => {
+    if( index >= this.frames.length ) index = 0;
+    console.clear();
+    console.log(this.frames[index]);
+    index += 1; 
+  }  
   this.render = function() {
-  const intervalId = setInterval(animate, 300);
-  // setTimeout(clearInterval, 3000, intervalId)
-  setTimeout(() => {
-    clearInterval(intervalId);
+    const intervalId = setInterval(animate, 300);
+    // setTimeout(clearInterval, 3000, intervalId)
+    setTimeout(() => {
+      clearInterval(intervalId);
       console.clear();
-      }, 3000);
-    }
+    }, 3000);
   }
+}
   // const loader = new Loader()
 
 function Clock() {
@@ -37,12 +37,25 @@ function Clock() {
       }, 8000);
 }
 
-function numberFormatter() {
+function numberFormatter(range, suffixes, num) {
+  let cont = 0
+  suffixes.forEach( (e,i) => {
+    if(num < range**(i+1) && cont == 0){
+      console.log(`${Math.trunc(num/range**(i))} ${suffixes[i]}`)
+      cont++
+    }
+  });
 }
+
+const egg = new EasterEgg("number formatter",1024, ["b", "Kb", "Mb"] )
+
+// const formater = new numberFormatter(1024, ["b", "Kb", "Mb"])
 
 function EasterEgg(func, ...args) {
   const loader = new Loader()
   loader.render()
+  let range;
+  let suffixes; 
   setTimeout(()=>{
     switch(func){
       case "clock":
@@ -50,15 +63,21 @@ function EasterEgg(func, ...args) {
         break;
       case "marquee":
         Marquee(args[0], args[1]);
-        break;     
+        break; 
+      case "number formatter":
+        range = args[0];
+        suffixes = args[1]; 
+        break;
+    }
+    this.snippet = (num) => {
+      numberFormatter(range, suffixes, num)
     }
   }, 3000)
   
-      
 }
 
 // EasterEgg("clock")
-EasterEgg("marquee","No mas pollos en un pais de cuyes",100)
+//EasterEgg("marquee","No mas pollos en un pais de cuyes",100)
 
 function Banner(content, long) {
   this.content = content;
