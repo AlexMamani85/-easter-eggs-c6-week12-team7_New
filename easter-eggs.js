@@ -1,9 +1,7 @@
 function TicTacToe(player,x=0,y=0,board) {
-
   function move(x,y,marc) {
     let array_board = board.split("");
     if (x==1 && y<=3 && y>0) {
-      // array_board[1] = marc;
       array_board[1 + 4*(y-1)] = marc;
     }
     else if (x==2 && y<=3 && y>0) {
@@ -120,7 +118,7 @@ function EasterEgg(func, ...args) {
                   moves_1[[x,y]]=[x,y];
                   finished = winner(moves_1)
                 } 
-                if (player%2 == 0) {
+                else {
                   moves_2[[x,y]]=[x,y];
                   finished = winner(moves_2)
                 }
@@ -169,18 +167,15 @@ function winner(moves) {
 // EasterEgg("marquee","No mas pollos en un pais de cuyes",100)
 // const egg = new EasterEgg("tic tac toe")
 
-function Banner(content, long) {
+function Banner(content, long) {  
   this.content = content;
-  this.banner = " ".repeat(long);
   let arr = []
   let j = long
-  for (let i = 1; i < long; i++) {
-    espacio="*";
-    espacio=" ";
-    let result = espacio.repeat(j);
+  for (let i = 0; i < long + content.length + 1; i++) {
+    let espacio=" ";
+    let result = espacio.repeat(j + content.length);
     let result2 = espacio.repeat(i);
-    console.clear();
-    arr.push(result.concat(content,result2).slice(content.length+2,long));
+    arr.push(result.concat(content,result2).slice(content.length,content.length + long))
     j--;
   }
   return arr
@@ -201,5 +196,7 @@ function Marquee(content, long){
     setTimeout(() => {
     clearInterval(intervalId);
     console.clear();
-  }, long * 200 - 200);
+  }, (frames.length + 1)*200);
 }
+
+ 
